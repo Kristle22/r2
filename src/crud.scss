@@ -1,0 +1,32 @@
+body {
+  font-family: 'Mali', cursive;
+}
+.list-group-item {
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    .content {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .buttons {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    b {
+      margin-right: 7px;
+    }
+    i {
+      margin-left: 7px;
+    }
+  }
+}
+
+.modal {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+}
