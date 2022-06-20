@@ -3,13 +3,15 @@ import { useState } from 'react';
 import TreeContext from './TreeContext';
 
 function Create() {
-  const { setCreateData } = useContext(TreeContext);
+  const { setCreateData, disableCreate, setDisableCreate } =
+    useContext(TreeContext);
 
   const [title, setTitle] = useState('');
   const [type, setType] = useState('1');
   const [height, setHeight] = useState('');
 
   const handleCreate = () => {
+    setDisableCreate(true);
     const data = { title, type, height };
     setCreateData(data);
     setTitle('');
@@ -60,10 +62,16 @@ function Create() {
         </div>
         <button
           type='button'
-          className='btn btn-outline-primary'
+          className='btn btn-outline-primary with-loader'
           onClick={handleCreate}
+          disabled={disableCreate}
         >
-          Create
+          <span
+            className='spinner-border spinner-border-sm mr-2'
+            // role='status'
+            // aria-hidden='true'
+          ></span>
+          <span className='spinner-text'>Create</span>
         </button>
       </div>
     </div>

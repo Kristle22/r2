@@ -50,7 +50,7 @@ app.post('/medziai', (req, res) => {
   `;
   con.query(sql, [req.body.type, req.body.title, req.body.height], (err, result) => {
     if (err) throw err;
-    res.send(result);
+    res.send({ result, msg: { text: 'OK, Zuiki', type: 'success' } });
   })
 });
 
@@ -63,19 +63,23 @@ app.delete('/medziai/:treeId', (req, res) => {
   `;
   con.query(sql, [req.params.treeId], (err, result) => {
     if (err) throw err;
-    res.send(result);
+    res.send({ result, msg: { text: 'Ok, Barsukai', type: 'danger' } });
   })
 });
 
 // EDIT(PUT);
-app.update('/medziai/:treeId', (req, res) => {
+// UPDATE table_name
+// SET column1 = value1, column2 = value2, ...
+// WHERE condition
+app.put('/medziai/:treeId', (req, res) => {
   const sql = `
-  UPDATE trees SET id = ?, title = ?, height = ?, type = ?
+  UPDATE trees 
+  SET title = ?, height = ?, type = ?
   where id = ?
   `;
-  con.query(sql, [req.body.type, req.body.title, req.body.height], (err, result) => {
+  con.query(sql, [req.body.title, req.body.height, req.body.type, req.params.treeId], (err, result) => {
     if (err) throw err;
-    res.send(result);
+    res.send({ result, msg: { text: 'OK, Bebrai', type: 'info' } });
   })
 });
 
