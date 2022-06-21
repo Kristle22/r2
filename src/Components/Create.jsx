@@ -3,21 +3,25 @@ import { useState } from 'react';
 import TreeContext from './TreeContext';
 
 function Create() {
-  const { setCreateData, disableCreate, setDisableCreate } =
+  const { setCreateData, disableCreate, setDisableCreate, goods } =
     useContext(TreeContext);
 
   const [title, setTitle] = useState('');
   const [type, setType] = useState('1');
   const [height, setHeight] = useState('');
 
+  const [good, setGood] = useState('0');
+
   const handleCreate = () => {
     setDisableCreate(true);
-    const data = { title, type, height };
+    const data = { title, type, height, good };
     setCreateData(data);
     setTitle('');
     setType('1');
     setHeight('');
+    setGood('0');
   };
+  console.log(good);
 
   return (
     <div className='card mt-4'>
@@ -47,6 +51,26 @@ function Create() {
             <option value='3'>Palm</option>
           </select>
           <small className='form-text text-muted'>Select Tree type here.</small>
+        </div>
+        <div className='form-group'>
+          <label>Good</label>
+          <select
+            className='form-control'
+            value={good}
+            onChange={(e) => setGood(e.target.value)}
+          >
+            <option value='0'>Select Good</option>
+            {goods
+              ? goods.map((g) => (
+                  <option key={g.id} value={g.id}>
+                    {g.title}
+                  </option>
+                ))
+              : null}
+          </select>
+          <small className='form-text text-muted'>
+            Select nice goody here.
+          </small>
         </div>
         <div className='form-group'>
           <label>Height</label>
