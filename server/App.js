@@ -125,9 +125,6 @@ ORDER BY trees_count DESC
   });
 });
 
-app.listen(port, () => {
-  console.log(`Bebras klauso porto Nr. ${port}`)
-});
 
 // DELETE
 // DELETE FROM table_name WHERE condition;
@@ -140,4 +137,8 @@ app.delete('/gerybes/:goodId', (req, res) => {
     if (err) throw err;
     res.send({ result, msg: { text: 'Ok, Barsukai', type: 'danger' } });
   })
+});
+
+app.listen(port, () => {
+  console.log(`Bebras klauso porto Nr. ${port}`)
 });
