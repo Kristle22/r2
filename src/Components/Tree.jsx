@@ -19,8 +19,10 @@ function Tree({ tree }) {
         <div className='content'>
           <b>{tree.title}</b>
           <span>{['Leaf', 'Spike', 'Palm'][tree.type - 1]}</span>
-          <i>{tree.height}</i>
-          <u style={{ marginLeft: '10px' }}>{tree.good}</u>
+          <i>{tree.height.toFixed(2)}</i>
+          <u style={{ marginLeft: '10px', color: 'yellowGreen' }}>
+            {tree.good}
+          </u>
         </div>
         <div className='buttons'>
           <button

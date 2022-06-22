@@ -9,7 +9,6 @@ function Create() {
   const [title, setTitle] = useState('');
   const [type, setType] = useState('1');
   const [height, setHeight] = useState('');
-
   const [good, setGood] = useState('0');
 
   const handleCreate = () => {

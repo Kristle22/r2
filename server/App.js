@@ -59,7 +59,7 @@ app.post('/medziai', (req, res) => {
   (type, title, height, good_id)
   VALUES (?, ?, ?, ?)
   `;
-  con.query(sql, [req.body.type, req.body.title, req.body.height, req.body.good], (err, result) => {
+  con.query(sql, [req.body.type, req.body.title, req.body.height ? req.body.height : 0, req.body.good === '0' ? null : req.body.good], (err, result) => {
     if (err) throw err;
     res.send({ result, msg: { text: 'OK, Zuiki', type: 'success' } });
   })
@@ -85,10 +85,10 @@ app.delete('/medziai/:treeId', (req, res) => {
 app.put('/medziai/:treeId', (req, res) => {
   const sql = `
   UPDATE trees 
-  SET title = ?, height = ?, type = ?
+  SET title = ?, height = ?, type = ?, good_id = ?
   where id = ?
   `;
-  con.query(sql, [req.body.title, req.body.height, req.body.type, req.params.treeId], (err, result) => {
+  con.query(sql, [req.body.title, req.body.height, req.body.type, req.body.good, req.params.treeId], (err, result) => {
     if (err) throw err;
     res.send({ result, msg: { text: 'OK, Bebrai', type: 'info' } });
   })
@@ -112,8 +112,13 @@ app.post('/gerybes', (req, res) => {
 app.get('/gerybes', (req, res) => {
   const sql = `
 SELECT
-*
-FROM goods`;
+g.title, g.id, COUNT(t.id) AS trees_count
+FROM trees AS t
+RIGHT JOIN goods AS g
+ON t.good_id = g.id
+GROUP BY g.id
+ORDER BY trees_count DESC
+`;
   con.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);
@@ -122,4 +127,17 @@ FROM goods`;
 
 app.listen(port, () => {
   console.log(`Bebras klauso porto Nr. ${port}`)
-})
+});
+
+// DELETE
+// DELETE FROM table_name WHERE condition;
+app.delete('/gerybes/:goodId', (req, res) => {
+  const sql = `
+  DELETE FROM goods
+  WHERE id = ?
+  `;
+  con.query(sql, [req.params.goodId], (err, result) => {
+    if (err) throw err;
+    res.send({ result, msg: { text: 'Ok, Barsukai', type: 'danger' } });
+  })
+});
