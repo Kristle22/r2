@@ -124,6 +124,52 @@ ORDER BY trees_count DESC
     res.send(result);
   });
 });
+// READ FRONT GOODS
+app.get('/front/gerybes', (req, res) => {
+  const sql = `
+SELECT
+g.title, g.id, COUNT(t.id) AS trees_count, GROUP_CONCAT(t.title) AS tree_titles
+FROM trees AS t
+RIGHT JOIN goods AS g
+ON t.good_id = g.id
+GROUP BY g.id
+ORDER BY g.title
+`;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+// READ FRONT TREES
+app.get('/front/medziai', (req, res) => {
+  const sql = `
+SELECT
+t.title, g.title AS good, height, type, t.id, GROUP_CONCAT(c.com, '-^o^-') AS coms
+FROM trees AS t
+LEFT JOIN goods AS g
+ON t.good_id = g.id
+LEFT JOIN comments AS c
+ON t.id = c.tree_id
+GROUP BY t.id
+`;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// CREATE FRONT COMMENTS
+app.post('/front/komentarai', (req, res) => {
+  const sql = `
+  INSERT INTO comments
+  (com, tree_id)
+  VALUES (?, ?)
+  `;
+  con.query(sql, [req.body.comment, req.body.treeId], (err, result) => {
+    if (err) throw err;
+    res.send({ result, msg: { text: 'OK, Zuiki', type: 'success' } });
+  })
+});
 
 
 // DELETE

@@ -1,9 +1,9 @@
 import GoodFront from './GoodFront';
 import { useContext } from 'react';
-import GoodFrontContext from './GoodFrontContext';
+import FrontContext from './FrontContext';
 
 function ListFront() {
-  const { trees, goods } = useContext(GoodFrontContext);
+  const { trees, goods } = useContext(FrontContext);
 
   return (
     <div className='card mt-4 mb-4'>

@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import GoodFrontContext from './GoodFrontContext';
+import FrontContext from './FrontContext';
 
 function GoodFront({ trees, good }) {
   console.log('trees', trees);
   console.log('good', good);
-  const { setComments, setRating } = useContext(GoodFrontContext);
+  const { setComments, setRating } = useContext(FrontContext);
 
   const handleComments = () => {
     setComments(good);

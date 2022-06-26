@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 // import './App.scss'
-import './bootstrap.css';
-import './crud.scss';
-import Create from './Components/Create';
-import List from './Components/List';
-import Edit from './Components/Edit';
-import TreeContext from './Components/TreeContext';
+import '../bootstrap.css';
+import '../crud.scss';
+import Create from '../Components/Create';
+import List from '../Components/List';
+import Edit from '../Components/Edit';
+import TreeContext from '../Components/TreeContext';
 import axios from 'axios';
-import Message from './Components/Message';
-import GoodContext from './Components/Goods/GoodContext';
-import CreateGoods from './Components/Goods/Create';
-import ListGoods from './Components/Goods/List';
+import Message from '../Components/Message';
+import GoodContext from '../Components/Goods/GoodContext';
+import CreateGoods from '../Components/Goods/Create';
+import ListGoods from '../Components/Goods/List';
 
 function Back() {
   const [lastUpdate, setLastUpdate] = useState(new Date());

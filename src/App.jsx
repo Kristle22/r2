@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Back from './Back';
-import Front from './Front';
+import './bootstrap.css';
+import Back from './pages/Back';
+import Front from './pages/Front';
 
 function App() {
   return (
